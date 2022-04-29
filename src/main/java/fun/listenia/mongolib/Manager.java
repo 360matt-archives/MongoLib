@@ -2,9 +2,14 @@ package fun.listenia.mongolib;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import fun.listenia.mongolib.assistants.Finder;
-import fun.listenia.mongolib.utils.Query;
+import fun.listenia.mongolib.assistants.Query;
+import fun.listenia.mongolib.assistants.Update;
+import fun.listenia.mongolib.builders.QueryBuilder;
+import fun.listenia.mongolib.builders.UpdateBuilder;
 import org.bson.Document;
+
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 
 public class Manager {
@@ -28,13 +33,14 @@ public class Manager {
         return collection;
     }
 
-    public Finder finder () {
-        return new Finder(collection);
+    public Query query (Consumer<QueryBuilder> consumer) {
+        return new Query(this.collection, consumer);
     }
 
-    public Finder finder (Query... criterias) {
-        return new Finder(collection).addQuery(criterias);
+    public Update update (BiConsumer<QueryBuilder, UpdateBuilder> consumer) {
+        return new Update(this.collection, consumer);
     }
+
 
 
 }
