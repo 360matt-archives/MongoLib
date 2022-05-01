@@ -11,16 +11,17 @@ import org.jetbrains.annotations.NotNull;
 
 public class MongoLib {
 
-    private static MongoAuth mongoAuth;
     private static MongoClient mongoClient;
 
     public static void init (@NotNull MongoAuth auth) {
-        MongoLib.mongoAuth = auth;
+        init(auth.getConnectionString());
+    }
+
+    public static void init (@NotNull String auth) {
         final MongoClientSettings settings = MongoClientSettings.builder()
-                .applyConnectionString(new ConnectionString(auth.getConnectionString()))
+                .applyConnectionString(new ConnectionString(auth))
                 .retryWrites(true)
                 .build();
-
         MongoLib.mongoClient = MongoClients.create(settings);
     }
 
