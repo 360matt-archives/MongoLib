@@ -1,6 +1,7 @@
 package fun.listenia.mongolib.builders;
 
 import org.bson.Document;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +9,42 @@ import java.util.Map;
 public class QueryBuilder {
 
     protected Map<String, Document> query = new HashMap<>();
+
+    private final ProjectionBuilder projectionBuilder;
+    private final SortBuilder sortBuilder;
+    private int skip;
+    private int limit;
+
+    public QueryBuilder() {
+        this.projectionBuilder = new ProjectionBuilder();
+        this.sortBuilder = new SortBuilder();
+    }
+
+    public QueryBuilder skip (@NotNull Integer skip) {
+        this.skip = skip;
+        return this;
+    }
+
+    public int getSkip() {
+        return skip;
+    }
+
+    public QueryBuilder limit (@NotNull Integer limit) {
+        this.limit = limit;
+        return this;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public SortBuilder sort () {
+        return this.sortBuilder;
+    }
+
+    public ProjectionBuilder projection () {
+        return this.projectionBuilder;
+    }
 
     public void equals (String field, Object value) {
         this.addToQuery(field, new Document("$eq", value));
