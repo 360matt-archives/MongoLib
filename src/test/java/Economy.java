@@ -1,30 +1,47 @@
 import fun.listenia.mongolib.Manager;
-import org.bson.Document;
+import fun.listenia.mongolib.converters.Element;
+import fun.listenia.mongolib.converters.Index;
+import fun.listenia.mongolib.converters.Required;
 
 import java.util.List;
 
-public class Economy extends Manager {
+public class Economy extends Manager<Economy.VillageEconomy> {
 
-    public Economy () {
-        super("villages", "economy");
+    public static class VillageEconomy extends Element {
+        @Required
+        @Index (unique = true)
+        public String village;
+        public int members;
+        public int score;
     }
 
+    public Economy () {
+        super("villages", "economy", VillageEconomy.class);
+    }
 
-    public void addScore (String village, int score) {
+    public void addVillage (VillageEconomy villageEconomy) {
+        this.insert(villageEconomy);
+    }
 
-        // a faire:
-        // skip, limit, sort, projection
-
-        this.query((query) -> {
+    public VillageEconomy getVillage (String village) {
+        return this.query((query -> {
             query.equals("village", village);
-            query.greaterThanOrEquals("members", score);
-        }).values();
+        })).element();
+    }
 
-        this.update((query, update) -> {
-            query.equals("village", village);
-            update.inc("score", score);
-        }).execute();
+    public void updateVillage (VillageEconomy villageEconomy) {
+        this.update(((query, update) -> {
+            query.equals("village", villageEconomy.village);
+            update.set("members", villageEconomy.members);
+            update.set("score", villageEconomy.score);
+        }));
+    }
 
+    public List<VillageEconomy> topScore (int limit) {
+        return this.query((query -> {
+            query.sort().desc("score");
+            query.limit(limit);
+        })).elements();
     }
 
 
