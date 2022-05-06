@@ -55,7 +55,7 @@ public class Manager <T extends Element> {
     }
 
     public Query<T> query (Consumer<QueryBuilder> consumer) {
-        return new Query<T>(this, consumer);
+        return new Query<>(this, consumer);
     }
 
     public Query<T> query (Document doc) {
@@ -63,7 +63,7 @@ public class Manager <T extends Element> {
     }
 
     public Update<T> update (BiConsumer<QueryBuilder, UpdateBuilder> consumer) {
-        return new Update<>(this.collection, consumer);
+        return new Update<>(this, consumer);
     }
 
     public boolean exists (Document doc) {

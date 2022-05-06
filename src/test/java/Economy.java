@@ -1,4 +1,6 @@
 import fun.listenia.mongolib.Manager;
+import fun.listenia.mongolib.MongoLib;
+import fun.listenia.mongolib.assistants.Query;
 import fun.listenia.mongolib.converters.Element;
 import fun.listenia.mongolib.converters.Index;
 import fun.listenia.mongolib.converters.Required;
@@ -17,6 +19,10 @@ public class Economy extends Manager<Economy.VillageEconomy> {
 
     public Economy () {
         super("villages", "economy", VillageEconomy.class);
+    }
+
+    public boolean existVillage (String village) {
+        return this.exists(Query.equals("village", village));
     }
 
     public void addVillage (VillageEconomy villageEconomy) {
