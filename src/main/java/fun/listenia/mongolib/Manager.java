@@ -40,7 +40,9 @@ public class Manager <T extends Element> {
     }
 
     public T getInstance () {
-        return (T) instance.clone();
+        T inst = (T) instance.clone();
+        inst.defineCollection(this.collection);
+        return inst;
     }
 
     public MongoCollection<Document> getCollection () {
@@ -56,7 +58,10 @@ public class Manager <T extends Element> {
     }
 
     public void insert (@NotNull T t) {
-        this.collection.insertOne(t.toDocument());
+        Document doc = t.toDocument();
+        this.collection.insertOne(doc);
+        t.defineID(doc.getObjectId("_id").toString());
+        t.defineCollection(this.collection);
     }
 
 

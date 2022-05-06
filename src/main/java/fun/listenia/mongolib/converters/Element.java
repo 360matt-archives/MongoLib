@@ -1,7 +1,9 @@
 package fun.listenia.mongolib.converters;
 
+import com.mongodb.client.MongoCollection;
 import fun.listenia.mongolib.Cache;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
@@ -9,7 +11,36 @@ import java.lang.reflect.Field;
 
 public class Element implements Cloneable {
 
+    private String _id;
+    private MongoCollection<Document> collection;
+
+    public void defineID (String id) {
+        this._id = id;
+    }
+
+    public void defineCollection (MongoCollection<Document> collection) {
+        this.collection = collection;
+    }
+
+    public String getID () {
+        return _id;
+    }
+
+    public void update () {
+        if (this._id == null)
+            throw new IllegalStateException("'_id' is not defined");
+        this.collection.replaceOne(new Document("_id", new ObjectId(this._id)), this.toDocument());
+    }
+
+    public void remove () {
+        if (this._id == null)
+            throw new IllegalStateException("'_id' is not defined");
+        this.collection.deleteOne(new Document("_id", this._id));
+    }
+
     public void fromDocument (Document document) {
+        if (document.containsKey("_id"))
+            this._id = document.get("_id").toString();
         try {
             this.fromSubDocument(this, document);
         } catch (CloneNotSupportedException e) {
