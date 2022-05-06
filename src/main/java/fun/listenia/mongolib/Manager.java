@@ -82,6 +82,22 @@ public class Manager <T extends Element> {
         t.defineCollection(this.collection);
     }
 
+    public T insert (@NotNull Consumer<T> consumer) {
+        T t = getInstance();
+        consumer.accept(t);
+        this.insert(t);
+        return t;
+    }
+
+    public void delete (@NotNull Consumer<QueryBuilder> consumer) {
+        Query<T> query = new Query<>(this, consumer);
+        query.delete();
+    }
+
+    public void deleteAll () {
+        this.collection.deleteMany(new Document());
+    }
+
 
 
 }
