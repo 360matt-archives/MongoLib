@@ -9,32 +9,40 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 import org.jetbrains.annotations.NotNull;
 
-public class MongoLib {
+import java.io.Closeable;
 
-    private static MongoClient mongoClient;
+public class MongoLib implements Closeable {
 
-    public static void init (@NotNull MongoAuth auth) {
-        init(auth.getConnectionString());
+    public static MongoLib DEFAULT = new MongoLib();
+
+    private MongoClient mongoClient;
+
+    public void connect (@NotNull MongoAuth auth) {
+        connect(auth.getConnectionString());
     }
 
-    public static void init (@NotNull String auth) {
+    public void connect (@NotNull String auth) {
         final MongoClientSettings settings = MongoClientSettings.builder()
                 .applyConnectionString(new ConnectionString(auth))
                 .retryWrites(true)
                 .build();
-        MongoLib.mongoClient = MongoClients.create(settings);
+        mongoClient = MongoClients.create(settings);
+    }
+
+    @Override
+    public void close () {
+        mongoClient.close();
     }
 
     @NotNull
-    public static MongoClient getClient() {
+    public MongoClient getClient() {
         if (mongoClient == null)
             throw new IllegalStateException("MongoLib is not initialized");
         return mongoClient;
     }
 
     @NotNull
-    public static MongoDatabase getDatabase (@NotNull String dbName) {
-        MongoDatabase database = getClient().getDatabase(dbName);
+    public MongoDatabase getDatabase (@NotNull String dbName) {
         return getClient().getDatabase(dbName);
     }
 

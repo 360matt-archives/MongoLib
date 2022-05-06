@@ -17,7 +17,8 @@ import java.util.function.Consumer;
 
 public class Manager <T extends Element> {
 
-    public static MongoCollection<Document> getOrCreate (MongoDatabase db, String name) {
+    @NotNull
+    private static MongoCollection<Document> getOrCreate (@NotNull MongoDatabase db, @NotNull String name) {
         for (final String candidate : db.listCollectionNames())
             if (candidate.equalsIgnoreCase(name))
                 return db.getCollection(name);
@@ -28,8 +29,8 @@ public class Manager <T extends Element> {
     private final MongoCollection<Document> collection;
     private T instance;
 
-    public Manager (final String dbName, final String collection, final Class<T> struc) {
-        MongoDatabase db = MongoLib.getDatabase(dbName);
+    public Manager (final MongoLib mongoLib, String dbName, final String collection, final Class<T> struc) {
+        MongoDatabase db = mongoLib.getDatabase(dbName);
         this.collection = getOrCreate(db, collection);
         Cache.registerIndexs(Cache.getClassCache(struc), this.collection);
         try {
@@ -37,6 +38,10 @@ public class Manager <T extends Element> {
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }
+    }
+
+    public Manager (String dbName, final String collection, final Class<T> struc) {
+        this(MongoLib.DEFAULT, dbName, collection, struc);
     }
 
     public T getInstance () {
