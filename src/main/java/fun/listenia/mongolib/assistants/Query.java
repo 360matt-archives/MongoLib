@@ -6,6 +6,7 @@ import fun.listenia.mongolib.Manager;
 import fun.listenia.mongolib.builders.QueryBuilder;
 import fun.listenia.mongolib.converters.Element;
 import org.bson.Document;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -23,6 +24,12 @@ public class Query<T extends Element> {
         this.collection = manager.getCollection();
         this.queryBuilder = new QueryBuilder();
         queryConsumer.accept(queryBuilder);
+    }
+
+    public Query (Manager<T> manager, @NotNull Document document) {
+        this.manager = manager;
+        this.collection = manager.getCollection();
+        this.queryBuilder = new QueryBuilder(document);
     }
 
     public FindIterable<Document> getQuery () {
@@ -93,6 +100,11 @@ public class Query<T extends Element> {
         return this;
     }
 
+    // exists
+    public boolean exists () {
+        return this.collection.countDocuments(this.queryBuilder.build()) > 0;
+    }
+
     public void delete () {
         this.collection.deleteMany(this.queryBuilder.build());
     }
@@ -100,6 +112,101 @@ public class Query<T extends Element> {
     public Query<T> delete (@NotNull Consumer<Void> consumer) {
         consumer.accept(null);
         return this;
+    }
+
+
+
+
+
+
+    @NotNull
+    @Contract("_, _ -> new")
+    public static Document equals (String field, Object value) {
+        return new Document(field, new Document("$eq", value));
+    }
+
+    @NotNull
+    @Contract("_, _ -> new")
+    public static Document notEquals (String field, Object value) {
+        return new Document(field, new Document("$ne", value));
+    }
+
+    @NotNull
+    @Contract("_, _ -> new")
+    public static Document greaterThan (String field, Object value) {
+        return new Document(field, new Document("$gt", value));
+    }
+
+    @NotNull
+    @Contract("_, _ -> new")
+    public static Document greaterThanOrEquals (String field, Object value) {
+        return new Document(field, new Document("$gte", value));
+    }
+
+    @NotNull
+    @Contract("_, _ -> new")
+    public static Document lessThan (String field, Object value) {
+        return new Document(field, new Document("$lt", value));
+    }
+
+    @NotNull
+    @Contract("_, _ -> new")
+    public static Document lessThanOrEquals (String field, Object value) {
+        return new Document(field, new Document("$lte", value));
+    }
+
+    @NotNull
+    @Contract("_, _ -> new")
+    public static Document in (String field, Object[] values) {
+        return new Document(field, new Document("$in", values));
+    }
+
+    @NotNull
+    @Contract("_, _ -> new")
+    public static Document notIn (String field, Object[] values) {
+        return new Document(field, new Document("$nin", values));
+    }
+
+    @NotNull
+    @Contract("_ -> new")
+    public static Document isNull (String field) {
+        return new Document(field, new Document("$exists", false));
+    }
+
+    @NotNull
+    @Contract("_ -> new")
+    public static Document isNotNull (String field) {
+        return new Document(field, new Document("$exists", true));
+    }
+
+    @NotNull
+    @Contract("_ -> new")
+    public static Document isEmpty (String field) {
+        return new Document(field, new Document("$size", new Document("$eq", 0)));
+    }
+
+    @NotNull
+    @Contract("_ -> new")
+    public static Document isNotEmpty (String field) {
+        return new Document(field, new Document("$size", new Document("$gt", 0)));
+    }
+
+    @NotNull
+    @Contract("_, _ -> new")
+    public static Document startsWith (String field, Object value) {
+        return new Document(field, new Document("$regex", "^" + value));
+    }
+
+    @NotNull
+    @Contract("_, _ -> new")
+    public static Document endsWith (String field, Object value) {
+        return new Document(field, new Document("$regex", value + "$"));
+    }
+
+    @NotNull
+    @Contract("_, _ -> new")
+    public static Document contains (String field, Object value) {
+        return new Document(field, new Document("$regex", ".*" + value + ".*"));
     }
 
 }

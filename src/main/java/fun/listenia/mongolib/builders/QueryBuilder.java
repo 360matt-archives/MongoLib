@@ -20,6 +20,11 @@ public class QueryBuilder {
         this.sortBuilder = new SortBuilder();
     }
 
+    public QueryBuilder (Document query) {
+        this();
+        this.query.putAll((Map) query);
+    }
+
     public QueryBuilder skip (@NotNull Integer skip) {
         this.skip = skip;
         return this;

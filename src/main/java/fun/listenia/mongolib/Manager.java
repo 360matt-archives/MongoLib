@@ -53,8 +53,21 @@ public class Manager <T extends Element> {
         return new Query<T>(this, consumer);
     }
 
+    public Query<T> query (Document doc) {
+        return new Query<>(this, doc);
+    }
+
     public Update<T> update (BiConsumer<QueryBuilder, UpdateBuilder> consumer) {
         return new Update<>(this.collection, consumer);
+    }
+
+    public boolean exists (Document doc) {
+        return collection.countDocuments(doc) > 0;
+    }
+
+    public boolean exists (@NotNull Consumer<QueryBuilder> consumer) {
+        Query<T> query = new Query<>(this, consumer);
+        return query.exists();
     }
 
     public void insert (@NotNull T t) {
