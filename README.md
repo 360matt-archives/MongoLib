@@ -25,14 +25,8 @@ Afin que la librairie puisse opérer comme prévu:
 
 Avant de pouvoir utiliser pleinement la librairie, certaines class ont besoin d'être instanciées
 
-{% content-ref url="premiers-pas/initialiser-une-connexion.md" %}
 [initialiser-une-connexion.md](premiers-pas/initialiser-une-connexion.md)
-{% endcontent-ref %}
 
-{% content-ref url="premiers-pas/creer-une-structure.md" %}
 [creer-une-structure.md](premiers-pas/creer-une-structure.md)
-{% endcontent-ref %}
 
-{% content-ref url="premiers-pas/creer-un-manager.md" %}
 [creer-un-manager.md](premiers-pas/creer-un-manager.md)
-{% endcontent-ref %}
