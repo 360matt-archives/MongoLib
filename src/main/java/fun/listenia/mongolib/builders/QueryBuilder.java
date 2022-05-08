@@ -75,19 +75,19 @@ public class QueryBuilder {
         this.addToQuery(field, new Document("$lte", value));
     }
 
-    public void in (String field, Object[] values) {
+    public void in (String field, Object... values) {
         this.addToQuery(field, new Document("$in", values));
     }
 
-    public void notIn (String field, Object[] values) {
+    public void notIn (String field, Object... values) {
         this.addToQuery(field, new Document("$nin", values));
     }
 
-    public void isNull (String field) {
+    public void notExists (String field) {
         this.addToQuery(field, new Document("$exists", false));
     }
 
-    public void isNotNull (String field) {
+    public void exists (String field) {
         this.addToQuery(field, new Document("$exists", true));
     }
 
@@ -107,7 +107,7 @@ public class QueryBuilder {
         this.addToQuery(field, new Document("$regex", value + "$"));
     }
 
-    public void contains (String field, Object value) {
+    public void containsText (String field, Object value) {
         this.addToQuery(field, new Document("$regex", ".*" + value + ".*"));
     }
 

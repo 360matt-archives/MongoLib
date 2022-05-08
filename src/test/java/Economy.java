@@ -1,5 +1,4 @@
 import fun.listenia.mongolib.Manager;
-import fun.listenia.mongolib.MongoLib;
 import fun.listenia.mongolib.assistants.Query;
 import fun.listenia.mongolib.converters.Element;
 import fun.listenia.mongolib.converters.Index;
@@ -30,9 +29,7 @@ public class Economy extends Manager<Economy.VillageEconomy> {
     }
 
     public VillageEconomy getVillage (String village) {
-        return this.query((query -> {
-            query.equals("village", village);
-        })).element();
+        return this.query(Query.equals("village", village)).element();
     }
 
     public void updateVillage (VillageEconomy villageEconomy) {

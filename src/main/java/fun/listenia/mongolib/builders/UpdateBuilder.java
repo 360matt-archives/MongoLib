@@ -32,15 +32,19 @@ public class UpdateBuilder {
         this.addToUpdates("$div", new Document(key, value));
     }
 
-    public void push (String key, Object value) {
+    public void push (String key, Object... value) {
         this.addToUpdates("$push", new Document(key, value));
     }
 
     public void pull (String key, Object value) {
-        this.addToUpdates("$pull", new Document(key, value));
+        this.pullAll(key, value);
     }
 
-    public void addToSet (String key, Object value) {
+    public void pull (String key, Object... values) {
+        this.pull(key, new Document("$in", values));
+    }
+
+    public void addToSet (String key, Object... value) {
         this.addToUpdates("$addToSet", new Document(key, value));
     }
 

@@ -1,4 +1,5 @@
 import fun.listenia.mongolib.MongoLib;
+import fun.listenia.mongolib.assistants.Query;
 
 public class Test {
 
@@ -10,6 +11,10 @@ public class Test {
 
         Economy economy = new Economy();
         economy.deleteAll();
+
+        Query<?> q = economy.query(((query) -> {
+            query.sort().near("field", 100, 300, 500);
+        }));
 
         // ** ** **
 

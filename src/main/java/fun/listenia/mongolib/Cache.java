@@ -6,6 +6,7 @@ import com.mongodb.client.model.IndexOptions;
 import fun.listenia.mongolib.converters.Index;
 import fun.listenia.mongolib.converters.Required;
 import org.bson.Document;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -37,15 +38,10 @@ public class Cache {
         }
     }
 
-    public static class FieldCache {
-        protected Field field;
-       // protected String name;
-      //  protected Class<?> type;
-    }
-
      private static final HashMap<Class<?>, ClassCache> classCaches = new HashMap<>();
 
 
+    @NotNull
     public static ClassCache getClassCache (Class<?> clazz) {
         ClassCache classCache = classCaches.get(clazz);
         if (classCache == null) {
@@ -55,7 +51,7 @@ public class Cache {
         return classCache;
     }
 
-    public static void registerIndexs (ClassCache classCache, MongoCollection<Document> collection) {
+    public static void registerIndexs (@NotNull ClassCache classCache, MongoCollection<Document> collection) {
         for (final Field field : classCache.fieldsCache) {
             final AtomicReference<Index.Type> already = new AtomicReference<>();
             // check if index is already created
@@ -104,7 +100,7 @@ public class Cache {
         }
     }
 
-    public static void registerRequired (ClassCache classCache) {
+    public static void registerRequired (@NotNull ClassCache classCache) {
         List<Field> fields = new ArrayList<>();
         for (final Field field : classCache.fieldsCache) {
             if (field.isAnnotationPresent(Required.class)) {

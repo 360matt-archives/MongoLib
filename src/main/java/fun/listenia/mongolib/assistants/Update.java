@@ -20,7 +20,7 @@ public class Update<T extends Element> {
     private final QueryBuilder queryBuilder;
     private final UpdateBuilder updateBuilder;
 
-    public Update (Manager<T> manager, @NotNull BiConsumer<QueryBuilder, UpdateBuilder> queryBuilderConsumer) {
+    public Update (@NotNull Manager<T> manager, @NotNull BiConsumer<QueryBuilder, UpdateBuilder> queryBuilderConsumer) {
         this.manager = manager;
         this.collection = manager.getCollection();
         this.queryBuilder = new QueryBuilder();

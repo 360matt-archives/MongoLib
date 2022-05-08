@@ -19,14 +19,14 @@ public class Query<T extends Element> {
     private final MongoCollection<Document> collection;
     private final QueryBuilder queryBuilder;
 
-    public Query (Manager<T> manager, @NotNull Consumer<QueryBuilder> queryConsumer) {
+    public Query (@NotNull Manager<T> manager, @NotNull Consumer<QueryBuilder> queryConsumer) {
         this.manager = manager;
         this.collection = manager.getCollection();
         this.queryBuilder = new QueryBuilder();
         queryConsumer.accept(queryBuilder);
     }
 
-    public Query (Manager<T> manager, @NotNull Document document) {
+    public Query (@NotNull Manager<T> manager, @NotNull Document document) {
         this.manager = manager;
         this.collection = manager.getCollection();
         this.queryBuilder = new QueryBuilder(document);
@@ -157,25 +157,25 @@ public class Query<T extends Element> {
 
     @NotNull
     @Contract("_, _ -> new")
-    public static Document in (String field, Object[] values) {
+    public static Document in (String field, Object... values) {
         return new Document(field, new Document("$in", values));
     }
 
     @NotNull
     @Contract("_, _ -> new")
-    public static Document notIn (String field, Object[] values) {
+    public static Document notIn (String field, Object... values) {
         return new Document(field, new Document("$nin", values));
     }
 
     @NotNull
     @Contract("_ -> new")
-    public static Document isNull (String field) {
+    public static Document notExists (String field) {
         return new Document(field, new Document("$exists", false));
     }
 
     @NotNull
     @Contract("_ -> new")
-    public static Document isNotNull (String field) {
+    public static Document exists (String field) {
         return new Document(field, new Document("$exists", true));
     }
 
@@ -205,7 +205,7 @@ public class Query<T extends Element> {
 
     @NotNull
     @Contract("_, _ -> new")
-    public static Document contains (String field, Object value) {
+    public static Document containsText (String field, Object value) {
         return new Document(field, new Document("$regex", ".*" + value + ".*"));
     }
 
