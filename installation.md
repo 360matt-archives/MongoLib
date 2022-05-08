@@ -4,9 +4,7 @@ description: Aide à l'installation de la librairie MongoLib
 
 # Installation
 
-{% hint style="info" %}
 **Bon à savoir:** la librairie n'utilise que très peu les dépendances externes afin de ne pas alourdir inutilement la librairie
-{% endhint %}
 
 ## Caractéristiques Java
 
@@ -16,9 +14,6 @@ Aucune autre contrainte n'est constatée.
 ## Maven
 
 Pour importer la librairie avec la version voulue
-
-{% tabs %}
-{% tab title="pom.xml" %}
 ```xml
     <repositories>
         <repository>
@@ -35,5 +30,3 @@ Pour importer la librairie avec la version voulue
         </dependency>
     </dependencies>
 ```
-{% endtab %}
-{% endtabs %}
