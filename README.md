@@ -17,9 +17,7 @@ Comme la création de structures, représentés par des class, leur instance rep
 
 Afin que la librairie puisse opérer comme prévu:
 
-{% content-ref url="installation.md" %}
 [installation.md](installation.md)
-{% endcontent-ref %}
 
 ## Commencer à tout préparer
 
