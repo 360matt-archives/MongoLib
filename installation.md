@@ -1,19 +1,20 @@
 ---
-description: Aide à l'installation de la librairie MongoLib
+description: Help installing the MongoLib library
 ---
 
 # Installation
 
-**Bon à savoir:** la librairie n'utilise que très peu les dépendances externes afin de ne pas alourdir inutilement la librairie
+**Good to know:** the library uses very little external dependencies in order not to unnecessarily weigh down the library
 
-## Caractéristiques Java
+## Java Features
 
-La version minimale requise de Java est la version 8.\
-Aucune autre contrainte n'est constatée.
+The minimum required version of Java is version 8. \
+No other constraint is observed
 
 ## Maven
 
-Pour importer la librairie avec la version voulue
+To import the library with the desired version
+
 ```xml
     <repositories>
         <repository>

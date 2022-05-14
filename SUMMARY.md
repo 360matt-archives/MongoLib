@@ -3,25 +3,25 @@
 * [MongoLib](README.md)
 * [Installation](installation.md)
 
-## Premiers pas
+## &#x20;First steps
 
-* [Initialiser une connexion](premiers-pas/initialiser-une-connexion.md)
-* [Créer une structure](premiers-pas/creer-une-structure.md)
-* [Créer un manager](premiers-pas/creer-un-manager.md)
+* [Initialize a connection](first-steps/initialiser-une-connexion.md)
+* [Create Structure](first-steps/creer-une-structure.md)
+* [Create a Manager](first-steps/creer-un-manager.md)
 
-## Faire une query
+## &#x20;Make a query
 
-* [Query](faire-une-query/query.md)
-* [QueryBuilder - Égalités](faire-une-query/querybuilder-egalites.md)
-* [QueryBuilder - Listes](faire-une-query/querybuilder-listes.md)
-* [QueryBuilder - Textes](faire-une-query/querybuilder-textes.md)
-* [QueryBuilder - Classement](faire-une-query/querybuilder-classement.md)
-* [QueryBuilder - Projection](faire-une-query/querybuilder-projection.md)
-* [QueryBuilder - Curseur](faire-une-query/querybuilder-curseur.md)
+* [Query](make-a-query/query.md)
+* [QueryBuilder - Equality](make-a-query/querybuilder-egalites.md)
+* [QueryBuilder - Lists](make-a-query/querybuilder-listes.md)
+* [QueryBuilder - Texts](make-a-query/querybuilder-textes.md)
+* [QueryBuilder - Sort](make-a-query/querybuilder-classement.md)
+* [QueryBuilder - Projection](make-a-query/querybuilder-projection.md)
+* [QueryBuilder - Curseur](make-a-query/querybuilder-curseur.md)
 
-## Faire une update
+## &#x20;Make an update
 
-* [Update](faire-une-update/update.md)
-* [UpdateBuilder - Field](faire-une-update/updatebuilder-field.md)
-* [UpdateBuilder - Math](faire-une-update/updatebuilder-math.md)
-* [UpdateBuilder - Listes](faire-une-update/updatebuilder-listes.md)
+* [Update](make-an-update/update.md)
+* [UpdateBuilder - Field](make-an-update/updatebuilder-field.md)
+* [UpdateBuilder - Math](make-an-update/updatebuilder-math.md)
+* [UpdateBuilder - Lists](make-an-update/updatebuilder-listes.md)

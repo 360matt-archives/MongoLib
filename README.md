@@ -1,30 +1,27 @@
 ---
-description: >-
-  Cette documentation aura pour but de vous faire découvrir le potentiel de
-  cette librairie
+description: This documentation will aim to make you discover the potential of this library
 ---
 
 # MongoLib
 
-## Pourquoi l'utiliser ?
+## Why use it?
 
-Déjà que la solution de base de donnée MongoDB est simple d'utilisation quelque soit le langage utilisé, grâce à sa particularité de no-sql et non relationnelle.
+Already the MongoDB database solution is easy to use regardless of the language used, thanks to its no-sql and non-relational feature.
 
-La librairie ci-présente permet de rajouter une couche de simplicité par dessus le driver officiel.\
-Comme la création de structures, représentés par des class, leur instance représente un document.
+The library here allows you to add a layer of simplicity over the official driver. Like the creation of structures, represented by classes, their instance represents a document.
 
-## Les prérequis
+## Prerequisites
 
-Afin que la librairie puisse opérer comme prévu:
+In order for the library to operate as expected:
 
 [installation.md](installation.md)
 
-## Commencer à tout préparer
+## Start preparing everything
 
-Avant de pouvoir utiliser pleinement la librairie, certaines class ont besoin d'être instanciées
+Before you can fully use the library, some classes need to be instantiated
 
-[initialiser-une-connexion.md](premiers-pas/initialiser-une-connexion.md)
+[initialize-a-connection.md](first-steps/initialiser-une-connexion.md)
 
-[creer-une-structure.md](premiers-pas/creer-une-structure.md)
+[create-structure.md](first-steps/creer-une-structure.md)
 
-[creer-un-manager.md](premiers-pas/creer-un-manager.md)
+[creer-a-manager.md](first-steps/creer-un-manager.md)
