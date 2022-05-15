@@ -29,9 +29,14 @@ public class MongoLib implements Closeable {
         mongoClient = MongoClients.create(settings);
     }
 
+    public boolean isConnected () {
+        return mongoClient != null;
+    }
+
     @Override
     public void close () {
         mongoClient.close();
+        mongoClient = null;
     }
 
     @NotNull
