@@ -56,8 +56,11 @@ public class Query<T extends Element> {
     }
 
     public T element () {
+        Document document = this.value();
+        if (document == null)
+            return null;
         T element = (T) manager.getInstance();
-        element.fromDocument(this.value());
+        element.fromDocument(document);
         return element;
     }
 
